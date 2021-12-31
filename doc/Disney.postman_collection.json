@@ -1,0 +1,18 @@
+{
+	"info": {
+		"_postman_id": "3993b670-fd4a-4208-ad6b-4632a04eaf56",
+		"name": "Disney",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "characters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
