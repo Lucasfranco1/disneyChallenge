@@ -28,7 +28,7 @@ public class CharacterMapper {
         return characterEntity;
     }
     
-   public CharacterDTO characterEntity2DTO(CharacterEntity entity){
+   public CharacterDTO characterEntity2DTO(CharacterEntity entity, boolean loadMovies){
         CharacterDTO dto=new CharacterDTO();
         dto.setId((entity.getId()));
         dto.setImage(entity.getImage());
@@ -36,12 +36,12 @@ public class CharacterMapper {
         dto.setAge(entity.getAge());
         dto.setWeight(entity.getWeight());
         dto.setStory(entity.getStory());
-//        if(loadMovies){
-//            List<MovieDTO>movieDTO=movieMapper.movieEntityList2DTOList(entity.getAssociatedMovies(), loadCharacters false);
-//        }
-//            dto.setAssociatedMovies(movieDTO);
-//        }
-//        
+        if(loadMovies){
+            List<MovieDTO>moviesDTOS=movieMapper.movieEntityList2DTOList(entity.getAssociatedMovies(), loadMovies);
+            dto.setAssociatedMovies(moviesDTOS);
+        }
+                    
+        
         return dto;
     }
     
@@ -85,5 +85,9 @@ public class CharacterMapper {
             
         }
         return dtos;
+    }
+
+    public CharacterDTO characterEntity2DTO(CharacterEntity saveEntity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

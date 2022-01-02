@@ -21,5 +21,9 @@ public class MovieDTO {
     private Date creationDate;
     private Integer qualification;
     private List<CharacterEntity> associatedCharacters;
+
+    public void setAssociatedCharacters(List<CharacterDTO> charactersDTO) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

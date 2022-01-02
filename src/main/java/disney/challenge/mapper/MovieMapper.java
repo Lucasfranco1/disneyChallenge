@@ -1,16 +1,22 @@
 package disney.challenge.mapper;
 
+import disney.challenge.dto.CharacterDTO;
 import disney.challenge.dto.MovieBasicDTO;
 import disney.challenge.dto.MovieDTO;
+import disney.challenge.entities.CharacterEntity;
 import disney.challenge.entities.MovieEntity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.logging.java.SimpleFormatter;
 
 public class MovieMapper {
+    @Autowired
+    private CharacterMapper characterMapper;
+            
 
 //    public List<MovieDTO> movieEntityList2DTOList(List<MovieEntity> entities, Boolean loadCharacters) {
 //        List<MovieDTO>dtos=new ArrayList();
@@ -30,14 +36,17 @@ public class MovieMapper {
 
     }
 
-    public MovieDTO movieEntity2DTO(MovieEntity entity) {
+    public MovieDTO movieEntity2DTO(MovieEntity entity, boolean loadCharacters) {
         MovieDTO movieDTO= new MovieDTO();
         movieDTO.setId(entity.getId());
         movieDTO.setImage(entity.getImage());
         movieDTO.setTitle(entity.getTitle());
         movieDTO.setCreationDate(entity.getCreationDate());
         movieDTO.setQualification(entity.getQualification());
-        movieDTO.setAssociatedCharacters(entity.getAssociatedCharacters());
+        if(loadCharacters){
+            List<CharacterDTO>charactersDTO= (List<CharacterDTO>) characterMapper.characterEntity2DTO((CharacterEntity) entity.getAssociatedCharacters(), false);
+            movieDTO.setAssociatedCharacters(charactersDTO);
+        }
         
         return movieDTO;
     }
@@ -66,6 +75,14 @@ public class MovieMapper {
     public Date formatterDate(Date dateFormatter) throws ParseException{
         Date date=new SimpleDateFormat().parse("yyyy-MM-dd");
         return date;
+    }
+
+    List<MovieDTO> movieEntityList2DTOList(List<MovieEntity> entities, boolean loadCharacters) {
+       List<MovieDTO>dtos=new ArrayList();
+        for (MovieEntity aux : entities) {
+            dtos.add(movieEntity2DTO(aux, loadCharacters));
+        }
+        return dtos;
     }
     
     

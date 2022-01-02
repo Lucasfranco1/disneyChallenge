@@ -28,7 +28,7 @@ public class MovieServiceImpl implements MovieService{
         try {
             MovieEntity entity= movieMapper.movieDTO2Entity(dto);
             MovieEntity saveEntity=movieRepository.save(entity);
-            MovieDTO result=movieMapper.movieEntity2DTO(saveEntity);
+            MovieDTO result=movieMapper.movieEntity2DTO(saveEntity, false);
             return result;
         } catch (ParseException ex) {
             Logger.getLogger(MovieServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
