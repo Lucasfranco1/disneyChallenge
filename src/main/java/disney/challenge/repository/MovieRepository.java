@@ -5,12 +5,11 @@
  */
 package disney.challenge.repository;
 
-import disney.challenge.entities.CharacterEntity;
+import disney.challenge.entities.MovieEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CharacterRepository extends JpaRepository<CharacterEntity, String> {
-    
+public interface MovieRepository extends JpaRepository<MovieEntity, String>{
     
 }

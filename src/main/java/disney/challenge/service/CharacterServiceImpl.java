@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package disney.challenge.service;
 
+import disney.challenge.dto.CharacterBasicDTO;
 import disney.challenge.dto.CharacterDTO;
 import disney.challenge.entities.CharacterEntity;
 import disney.challenge.mapper.CharacterMapper;
@@ -23,9 +20,7 @@ public class CharacterServiceImpl implements CharacterService{
     private CharacterRepository characterRepository;
     
     
-     public CharacterDTO save(CharacterDTO dto){
-        
-         
+     public CharacterDTO save(CharacterDTO dto){                 
       CharacterEntity entity= characterMapper.characterDTO2Entity(dto);
       CharacterEntity saveEntity=characterRepository.save(entity);
       CharacterDTO result=characterMapper.characterEntity2DTO(saveEntity);
@@ -34,9 +29,14 @@ public class CharacterServiceImpl implements CharacterService{
     }
 
   
-    public List<CharacterDTO> getAllCharacters() {
+    public List<CharacterBasicDTO> getAllCharacters() {
        List<CharacterEntity>entities=characterRepository.findAll();
-       List<CharacterDTO>result=characterMapper.characterEntityList2DTOList(entities);
+       List<CharacterBasicDTO>result=characterMapper.characterEntitySet2BasicDTOList(entities);
        return result;
+    }
+
+    
+    public void delete(String id) {
+        characterRepository.deleteById(id);
     }
 }
