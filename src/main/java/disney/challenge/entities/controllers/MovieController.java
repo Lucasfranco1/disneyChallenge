@@ -5,10 +5,9 @@
  */
 package disney.challenge.entities.controllers;
 
-import disney.challenge.dto.CharacterDTO;
+
 import disney.challenge.dto.MovieBasicDTO;
 import disney.challenge.dto.MovieDTO;
-import disney.challenge.service.CharacterService;
 import disney.challenge.service.MovieService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,4 +48,6 @@ public class MovieController {
         movieService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+    
+    
 }

@@ -12,7 +12,9 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.logging.java.SimpleFormatter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MovieMapper {
     @Autowired
     private CharacterMapper characterMapper;

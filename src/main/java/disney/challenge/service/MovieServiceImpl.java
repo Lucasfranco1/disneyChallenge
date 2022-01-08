@@ -47,7 +47,8 @@ public class MovieServiceImpl implements MovieService{
 
     
     public void delete(String id) {
-    
+       movieRepository.deleteById(id);
     }
+    
     
 }
