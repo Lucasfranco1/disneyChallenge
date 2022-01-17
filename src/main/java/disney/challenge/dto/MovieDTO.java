@@ -18,12 +18,15 @@ public class MovieDTO {
     private String id;
     private String image;
     private String title;
-    private Date creationDate;
+    private String creationDate;
     private Integer qualification;
     private List<CharacterEntity> associatedCharacters;
 
-    public void setAssociatedCharacters(List<CharacterDTO> charactersDTO) {
+    private List<GenderDTO> genders;
+    public void setCreationDate(String formatDate) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+   
     
 }

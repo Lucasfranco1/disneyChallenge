@@ -19,5 +19,7 @@ public class MovieBasicDTO {
     
     private String title;
     
-    private Date creationDate;
+    private String creationDate;
+
+    
 }

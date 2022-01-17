@@ -1,19 +1,18 @@
 package disney.challenge.entities;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -39,9 +38,9 @@ public class MovieEntity {
     
 
     @Column(name="creation_date")
-    @Temporal(TemporalType.DATE)
-    private Date creationDate;
-
+    @DateTimeFormat(pattern="yyyy/MM/dd")
+    private LocalDate creationDate;
+    
     private Integer qualification;
     
     @ManyToMany(cascade={
@@ -54,5 +53,14 @@ public class MovieEntity {
             inverseJoinColumns=@JoinColumn(name="character.id"))
     private List<CharacterEntity> associatedCharacters;
 
+    @ManyToMany(cascade = {
+        CascadeType.PERSIST,
+        CascadeType.MERGE},
+        fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "movie_genders",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "gender_id"))
+    private List<GenderEntity> genders = new ArrayList<>();
     private Boolean deleted= Boolean.FALSE;
 }

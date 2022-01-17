@@ -2,10 +2,15 @@
 package disney.challenge.entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,8 +31,7 @@ public class GenderEntity {
     
     private String name;
     
-    @JoinColumn(name = "gender_movie")
-    @OneToOne
-    private MovieEntity associatedMovie;
+    @ManyToMany(mappedBy = "genders",fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    private List<MovieEntity> movies = new ArrayList<>();
 
 }

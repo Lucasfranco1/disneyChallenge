@@ -7,17 +7,30 @@ package disney.challenge.service;
 
 import disney.challenge.dto.CharacterBasicDTO;
 import disney.challenge.dto.CharacterDTO;
+import disney.challenge.entities.CharacterEntity;
 import java.util.List;
+import java.util.Set;
 
 
 public interface CharacterService {
  
-     CharacterDTO save(CharacterDTO dto);
-     
-     
-     List<CharacterBasicDTO>getAllCharacters();
-     
-     //void removePais(Long id, Long idPais);
-     
-     void delete(String id);
+     List<CharacterDTO> getAllCharacters();
+
+    List<CharacterBasicDTO> getBasicCharList();
+
+    CharacterDTO modify(Long id, CharacterDTO charDTO);
+
+    CharacterDTO save(CharacterDTO charDTO);
+
+    CharacterEntity getCharById(String id);
+
+    void delete(Long id);
+
+    List<CharacterDTO> getByFilters(String name, Integer age, Set<Long> movies, String order);
+
+    CharacterDTO getDetailById(Long id);
+
+    void addMovie(Long id, Long idMovie);
+
+    void removeMovie(Long id, Long idMovie);
 }
