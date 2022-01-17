@@ -1,5 +1,6 @@
 package disney.challenge.service;
 
+import com.sendgrid.Method;
 import disney.challenge.service.EmailService;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
