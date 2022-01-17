@@ -29,8 +29,8 @@ public class EmailServiceImp implements EmailService {
         String apiKey = environment.getProperty("EMAIL_API_KEY");
         Email fromEmail = new Email(emailSender);
         Email toEmail = new Email(to);
-        Content content = new Content("text/plain", "Welcome to DISNEY");
-        String subject = "Disney Movie Characters";
+        Content content = new Content("text/plain", "Welcome to Disney Movie");
+        String subject = "Disney Movies and Characters";
 
         Mail mail = new Mail(fromEmail, subject, toEmail, content);
         SendGrid sg = new SendGrid(apiKey);
