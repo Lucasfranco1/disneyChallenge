@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,29 +25,48 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
+   
     
     @Autowired
     private MovieService movieService;
-    
-    
+
     @GetMapping
-    public ResponseEntity<List<MovieBasicDTO>> getAll(){
-        List<MovieBasicDTO>characters= movieService.getAllMovies();
-        return ResponseEntity.ok().body(characters);
+    public ResponseEntity<List<MovieBasicDTO>> getBasicList() {
+
+        List<MovieBasicDTO> movies = movieService.getBasicList();
+        return ResponseEntity.ok().body(movies);
     }
-    
-    
+
+    @GetMapping("/alldetails")
+    public ResponseEntity<List<MovieDTO>> getAllDetails() {
+
+        List<MovieDTO> movies = movieService.getAllMovies();
+        return ResponseEntity.ok().body(movies);
+    }
+
     @PostMapping
-    public ResponseEntity<MovieDTO> save(@RequestBody MovieDTO character){        
-        
-        MovieDTO characterSave= movieService.save(character);
-        return ResponseEntity.status(HttpStatus.CREATED).body(characterSave);
+    public ResponseEntity<MovieDTO> save(@RequestBody MovieDTO movieDTO) {
+        MovieDTO savedMovie = movieService.save(movieDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie);
+
     }
-    
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MovieDTO> modify(@PathVariable String id, @RequestBody MovieDTO movieDTO) {
+        MovieDTO editedMovie = movieService.modify(id, movieDTO);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(editedMovie);
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void>delete(@PathVariable String id){
-        movieService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        movieService.deleteMovieById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PutMapping("/{movieId}/character/{charId}")
+    public ResponseEntity<Void> addCharacter(@PathVariable String movieId, @PathVariable String charId) {
+        movieService.addCharacter(movieId, charId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     
     

@@ -12,8 +12,8 @@ import disney.challenge.repository.specification.MovieSpecification;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,7 +85,7 @@ public class MovieServiceImpl implements MovieService{
         MovieEntity movieEntity = this.getById(movieId);
         movieEntity.getAssociatedCharacters().size();
 
-        CharacterEntity character = characterservice.getCharById(characterId);
+        CharacterEntity character = characterservice.getCharacterById(characterId);
         movieEntity.getAssociatedCharacters().add(character);
         movieRepository.save(movieEntity);
     }
@@ -114,6 +114,11 @@ public class MovieServiceImpl implements MovieService{
         List<MovieEntity> entityList = movieRepository.findAll(movieSpecification.getFiltered(movieFilters));
         List<MovieDTO> result = movieMapper.movieEntityList2DTOList(entityList, true);
         return result;
+    }
+
+    @Override
+    public void addGender(String movieId, String ganderId) {
+        
     }
 
     

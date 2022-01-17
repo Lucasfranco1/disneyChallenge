@@ -24,6 +24,7 @@ public interface MovieService {
 
     MovieDTO getByDetails(String id);
     
-
+    void addGender(String movieId, String ganderId);
+    
     List<MovieDTO> getByFilters(String name, Set<Long> genre, String order);
 }

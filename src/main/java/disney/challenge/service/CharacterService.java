@@ -14,23 +14,23 @@ import java.util.Set;
 
 public interface CharacterService {
  
-     List<CharacterDTO> getAllCharacters();
+    List<CharacterDTO> getAllCharacters();
 
-    List<CharacterBasicDTO> getBasicCharList();
+    List<CharacterBasicDTO> getBasicCharacterList();
 
-    CharacterDTO modify(Long id, CharacterDTO charDTO);
+    CharacterDTO modify(String id, CharacterDTO charDTO);
 
     CharacterDTO save(CharacterDTO charDTO);
 
-    CharacterEntity getCharById(String id);
+    CharacterEntity getCharacterById(String id);
 
-    void delete(Long id);
+    void delete(String id);
 
     List<CharacterDTO> getByFilters(String name, Integer age, Set<Long> movies, String order);
 
-    CharacterDTO getDetailById(Long id);
+    CharacterDTO getDetailById(String id);
 
-    void addMovie(Long id, Long idMovie);
+    void addMovie(String id, String idMovie);
 
-    void removeMovie(Long id, Long idMovie);
+    void removeMovie(String id, String idMovie);
 }

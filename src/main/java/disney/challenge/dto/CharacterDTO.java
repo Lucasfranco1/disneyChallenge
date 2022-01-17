@@ -21,9 +21,7 @@ public class CharacterDTO {
     
     private String story;
     
-    private List<MovieEntity> associatedMovies;
+    private List<MovieDTO> associatedMovies;
 
-    public void setAssociatedMovies(List<MovieDTO> moviesDTOS) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 }

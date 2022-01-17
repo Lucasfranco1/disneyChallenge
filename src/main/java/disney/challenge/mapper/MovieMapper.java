@@ -63,7 +63,6 @@ public class MovieMapper {
 
     public List<MovieEntity> movieDTOList2EntityList(List<MovieDTO> dtoList, boolean load) {
         List<MovieEntity> entities = new ArrayList<>();
-
         for (MovieDTO dto : dtoList) {
             entities.add(this.movieDTO2Entity(dto, false));
         }

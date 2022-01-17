@@ -16,52 +16,65 @@ public class CharacterMapper {
     @Autowired
     private MovieMapper movieMapper;
     
-    public CharacterEntity characterDTO2Entity(CharacterDTO dto){
+     public CharacterEntity characterDTO2Entity(CharacterDTO dto) {
         CharacterEntity characterEntity = new CharacterEntity();
-        characterEntity.setImage(dto.getImage());
+
         characterEntity.setName(dto.getName());
+        characterEntity.setImage(dto.getImage());
         characterEntity.setAge(dto.getAge());
         characterEntity.setWeight(dto.getWeight());
         characterEntity.setStory(dto.getStory());
-        characterEntity.setAssociatedMovies(dto.getAssociatedMovies());
-        
+
         return characterEntity;
     }
-    
-   public CharacterDTO characterEntity2DTO(CharacterEntity entity, boolean loadMovies){
-        CharacterDTO dto=new CharacterDTO();
-        dto.setId((entity.getId()));
-        dto.setImage(entity.getImage());
-        dto.setName(entity.getName());
-        dto.setAge(entity.getAge());
-        dto.setWeight(entity.getWeight());
-        dto.setStory(entity.getStory());
-        if(loadMovies){
-            List<MovieDTO>moviesDTOS=movieMapper.movieEntityList2DTOList(entity.getAssociatedMovies(), loadMovies);
-            dto.setAssociatedMovies(moviesDTOS);
-        }
-                    
-        
+
+    public CharacterDTO characterEntity2DTO(CharacterEntity characterEntity, boolean loadMovie) {
+        CharacterDTO dto = new CharacterDTO();
+
+        dto.setId(characterEntity.getId());
+        dto.setName(characterEntity.getName());
+        dto.setImage(characterEntity.getImage());
+        dto.setAge(characterEntity.getAge());
+        dto.setWeight(characterEntity.getWeight());
+        dto.setStory(characterEntity.getStory());
+
         return dto;
     }
-    
-    
-    
-    public List<CharacterBasicDTO> characterEntitySet2BasicDTOList(Collection<CharacterEntity> entities){
-        List<CharacterBasicDTO>dtos=new ArrayList();
-        CharacterBasicDTO basicDTO;
-        for (CharacterEntity aux : entities) {
-            basicDTO=new CharacterBasicDTO();
-            basicDTO.setId(aux.getId());
-            basicDTO.setImage(aux.getImage());
-            basicDTO.setImage(aux.getName());
-            dtos.add(basicDTO);
-            
+
+    public List<CharacterDTO> characterEntityList2DTOList(List<CharacterEntity> entities, boolean loadMovie) {
+        List<CharacterDTO> dtoList = new ArrayList<>();
+
+        for (CharacterEntity entity : entities) {
+            dtoList.add(characterEntity2DTO(entity, loadMovie));
         }
-        return dtos;
+        return dtoList;
     }
 
-    public CharacterDTO characterEntity2DTO(CharacterEntity saveEntity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<CharacterEntity> characterDTOList2EntityList(List<CharacterDTO> dtoList, boolean load) {
+        List<CharacterEntity> entities = new ArrayList<>();
+
+        for (CharacterDTO dto : dtoList) {
+            entities.add(this.characterDTO2Entity(dto));
+        }
+        return entities;
+    }
+
+    public CharacterBasicDTO entity2BasicDTO(CharacterEntity charEntity) {
+        CharacterBasicDTO dtoBasic = new CharacterBasicDTO();
+
+        dtoBasic.setId(charEntity.getId());
+        dtoBasic.setName(charEntity.getName());
+        dtoBasic.setImage(charEntity.getImage());
+
+        return dtoBasic;
+    }
+
+    public List<CharacterBasicDTO> basicEntityList2DTOBasicList(List<CharacterEntity> entities) {
+        List<CharacterBasicDTO> basicList = new ArrayList<>();
+        
+        for (CharacterEntity entity : entities) {
+             basicList.add(this.entity2BasicDTO(entity));
+        }
+        return basicList;
     }
 }
