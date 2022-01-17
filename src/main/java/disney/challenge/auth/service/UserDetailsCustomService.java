@@ -4,6 +4,7 @@ package disney.challenge.auth.service;
 import disney.challenge.auth.dto.UserDTO;
 import disney.challenge.auth.entity.UserEntity;
 import disney.challenge.auth.repository.UserRepo;
+import disney.challenge.service.EmailService;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
